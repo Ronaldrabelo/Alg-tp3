@@ -1,0 +1,3 @@
+C:/Users/casa-/OneDrive/Área de Trabalho/Faculdade/Algoritmos/Alg-tp3/cmake-build-debug/CMakeFiles/Alg_tp3.dir
+C:/Users/casa-/OneDrive/Área de Trabalho/Faculdade/Algoritmos/Alg-tp3/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/casa-/OneDrive/Área de Trabalho/Faculdade/Algoritmos/Alg-tp3/cmake-build-debug/CMakeFiles/rebuild_cache.dir

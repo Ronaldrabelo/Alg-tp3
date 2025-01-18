@@ -17,7 +17,7 @@ int calculateRouteCost(const vector<string>& route, const Graph& graph) {
         if (graph.count(from) > 0 && graph.at(from).count(to) > 0) {
             cost += graph.at(from).at(to);
         } else {
-            return numeric_limits<int>::max(); // Rota inválida
+            return numeric_limits<int>::max();
         }
     }
     const auto& last = route.back();

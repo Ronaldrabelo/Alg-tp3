@@ -46,6 +46,7 @@ pair<int, vector<string>> bruteForceTSP(const vector<string>& cities, const Grap
     return {minCost, bestRoute};
 }
 
+
 int main() {
     char strategy;
     int V, E;

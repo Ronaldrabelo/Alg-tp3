@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <limits>
 #include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -41,11 +42,70 @@ pair<int, vector<string>> bruteForceTSP(const vector<string>& cities, const Grap
             minCost = currentCost;
             bestRoute = route;
         }
-    } while (ranges::next_permutation(route).found);
+    } while (next_permutation(route.begin(), route.end()));
 
     return {minCost, bestRoute};
 }
 
+map<string, int> cityToIndex;
+vector<string> indexToCity;
+
+int tspDP(int currentCity, int visitedMask, const vector<vector<int>>& dist, vector<vector<int>>& memo) {
+    if (visitedMask == (1 << dist.size()) - 1) {
+        return dist[currentCity][0];
+    }
+
+    if (memo[currentCity][visitedMask] != -1) {
+        return memo[currentCity][visitedMask];
+    }
+
+    int minCost = numeric_limits<int>::max();
+
+    for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+        if (!(visitedMask & (1 << nextCity))) {
+            int cost = dist[currentCity][nextCity] + tspDP(nextCity, visitedMask | (1 << nextCity), dist, memo);
+            minCost = min(minCost, cost);
+        }
+    }
+
+    memo[currentCity][visitedMask] = minCost;
+    return minCost;
+}
+
+void reconstructRoute(int currentCity, int visitedMask, const vector<vector<int>>& dist, vector<vector<int>>& memo, vector<int>& route) {
+    if (route.empty()) {
+        route.push_back(currentCity);
+    }
+
+    if (visitedMask == (1 << dist.size()) - 1) {
+        return;
+    }
+
+    bool nextCityFound = false;
+
+    for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+        if (!(visitedMask & (1 << nextCity))) {
+            int expectedCost = dist[currentCity][nextCity] + memo[nextCity][visitedMask | (1 << nextCity)];
+
+            if (expectedCost == memo[currentCity][visitedMask]) {
+                route.push_back(nextCity);
+                reconstructRoute(nextCity, visitedMask | (1 << nextCity), dist, memo, route);
+                nextCityFound = true;
+                break;
+            }
+        }
+    }
+
+    if (!nextCityFound) {
+        for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+            if (!(visitedMask & (1 << nextCity))) {
+                route.push_back(nextCity);
+                reconstructRoute(nextCity, visitedMask | (1 << nextCity), dist, memo, route);
+                break;
+            }
+        }
+    }
+}
 
 int main() {
     char strategy;
@@ -78,6 +138,33 @@ int main() {
         cout << minCost << endl;
         for (const auto& city : bestRoute) {
             cout << city << " ";
+        }
+        cout << endl;
+    } else if (strategy == 'd') {
+        for (size_t i = 0; i < cities.size(); ++i) {
+            cityToIndex[cities[i]] = i;
+            indexToCity.push_back(cities[i]);
+        }
+
+        vector<vector<int>> dist(V, vector<int>(V, numeric_limits<int>::max()));
+        for (const auto& [city1, neighbors] : graph) {
+            int i = cityToIndex[city1];
+            for (const auto& [city2, distance] : neighbors) {
+                int j = cityToIndex[city2];
+                dist[i][j] = distance;
+            }
+        }
+
+        vector<vector<int>> memo(V, vector<int>(1 << V, -1));
+
+        int minCost = tspDP(0, 1, dist, memo);
+
+        vector<int> route;
+        reconstructRoute(0, 1, dist, memo, route);
+
+        cout << minCost << endl;
+        for (int cityIndex : route) {
+            cout << indexToCity[cityIndex] << " ";
         }
         cout << endl;
     }

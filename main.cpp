@@ -168,6 +168,8 @@ int main() {
         vector<int> route;
         reconstructRoute(0, 1, dist, memo, route);
 
+        // reverse(route.begin() + 1, route.end());
+
         cout << minCost << endl;
         for (int cityIndex : route) {
             cout << indexToCity[cityIndex] << " ";

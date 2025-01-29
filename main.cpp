@@ -133,7 +133,9 @@ int main() {
     }
 
     if (strategy == 'b') {
-        auto [minCost, bestRoute] = bruteForceTSP(cities, graph);
+        pair<int, vector<string>> result = bruteForceTSP(cities, graph);
+        int minCost = result.first;
+        vector<string> bestRoute = result.second;
 
         cout << minCost << endl;
         for (const auto& city : bestRoute) {
@@ -147,9 +149,13 @@ int main() {
         }
 
         vector<vector<int>> dist(V, vector<int>(V, numeric_limits<int>::max()));
-        for (const auto& [city1, neighbors] : graph) {
+        for (const auto& city_neighbors : graph) {
+            const string& city1 = city_neighbors.first;
+            const auto& neighbors = city_neighbors.second;
             int i = cityToIndex[city1];
-            for (const auto& [city2, distance] : neighbors) {
+            for (const auto& neighbor : neighbors) {
+                const string& city2 = neighbor.first;
+                int distance = neighbor.second;
                 int j = cityToIndex[city2];
                 dist[i][j] = distance;
             }

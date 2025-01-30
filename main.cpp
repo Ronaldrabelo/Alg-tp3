@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
 #include <limits>
 #include <map>
 #include <unordered_map>
@@ -9,6 +8,28 @@
 using namespace std;
 
 using Graph = map<string, map<string, int>>;
+
+void reverseVector(vector<string>& vec, int start, int end) {
+    while (start < end) {
+        swap(vec[start], vec[end]);
+        start++;
+        end--;
+    }
+}
+
+bool next_permutation(vector<string>& route) {
+    int i = static_cast<int>(route.size()) - 2;
+    while (i >= 0 && route[i] >= route[i + 1]) i--;
+    if (i < 0) return false;
+    int j = static_cast<int>(route.size()) - 1;
+    while (route[j] <= route[i]) j--;
+    swap(route[i], route[j]);
+
+    reverseVector(route, i + 1, static_cast<int>(route.size()) - 1);
+
+    return true;
+}
+
 
 int calculateRouteCost(const vector<string>& route, const Graph& graph) {
     int cost = 0;
@@ -30,19 +51,17 @@ int calculateRouteCost(const vector<string>& route, const Graph& graph) {
     }
     return cost;
 }
-
-pair<int, vector<string>> bruteForceTSP(const vector<string>& cities, const Graph& graph) {
+pair<int, vector<string>> bruteForceTSP(vector<string> cities, const Graph& graph) {
     vector<string> bestRoute;
     int minCost = numeric_limits<int>::max();
 
-    vector<string> route = cities;
     do {
-        int currentCost = calculateRouteCost(route, graph);
+        int currentCost = calculateRouteCost(cities, graph);
         if (currentCost < minCost) {
             minCost = currentCost;
-            bestRoute = route;
+            bestRoute = cities;
         }
-    } while (next_permutation(route.begin(), route.end()));
+    } while (next_permutation(cities));
 
     return {minCost, bestRoute};
 }
@@ -150,6 +169,8 @@ int main() {
 
     vector<string> cities;
     Graph graph;
+    unordered_map<string, bool> cityExists;
+
 
     for (int i = 0; i < E; ++i) {
         string city1, city2;
@@ -159,11 +180,13 @@ int main() {
         graph[city1][city2] = distance;
         graph[city2][city1] = distance;
 
-        if (find(cities.begin(), cities.end(), city1) == cities.end()) {
+        if (!cityExists[city1]) {
             cities.push_back(city1);
+            cityExists[city1] = true;
         }
-        if (find(cities.begin(), cities.end(), city2) == cities.end()) {
+        if (!cityExists[city2]) {
             cities.push_back(city2);
+            cityExists[city2] = true;
         }
     }
 

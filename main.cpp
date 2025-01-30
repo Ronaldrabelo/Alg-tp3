@@ -107,6 +107,41 @@ void reconstructRoute(int currentCity, int visitedMask, const vector<vector<int>
     }
 }
 
+pair<int, vector<string>> greedyTSP(const vector<string>& cities, const Graph& graph) {
+    vector<string> route;
+    unordered_map<string, bool> visited;
+    string current = cities[0];
+    route.push_back(current);
+    visited[current] = true;
+    int cost = 0;
+
+    for (size_t i = 1; i < cities.size(); ++i) {
+        string nextCity;
+        int minDist = numeric_limits<int>::max();
+
+        for (const auto& neighbor : graph.at(current)) {
+            if (!visited[neighbor.first] && neighbor.second < minDist) {
+                minDist = neighbor.second;
+                nextCity = neighbor.first;
+            }
+        }
+
+        if (nextCity.empty()) return {numeric_limits<int>::max(), {}};
+        route.push_back(nextCity);
+        visited[nextCity] = true;
+        cost += minDist;
+        current = nextCity;
+    }
+
+    if (graph.at(current).count(route[0])) {
+        cost += graph.at(current).at(route[0]);
+        route.push_back(route[0]);
+    } else {
+        return {numeric_limits<int>::max(), {}};
+    }
+    return {cost, route};
+}
+
 int main() {
     char strategy;
     int V, E;
@@ -173,6 +208,14 @@ int main() {
         cout << minCost << endl;
         for (int cityIndex : route) {
             cout << indexToCity[cityIndex] << " ";
+        }
+        cout << endl;
+    } else if (strategy == 'g') {
+        pair<int, vector<string>> result;
+        result = greedyTSP(cities, graph);
+        cout << result.first << endl;
+        for (const auto& city : result.second) {
+            cout << city << " ";
         }
         cout << endl;
     }

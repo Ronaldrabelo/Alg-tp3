@@ -55,6 +55,36 @@ build CMakeFiles/Alg_tp3.dir/main.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug
   OBJECT_DIR = CMakeFiles\Alg_tp3.dir
   OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir
 
+build CMakeFiles/Alg_tp3.dir/src/utils/GraphUtils.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug C$:/Users/casa-/OneDrive/Área$ de$ Trabalho/Faculdade/Algoritmos/Alg-tp3/src/utils/GraphUtils.cpp || cmake_object_order_depends_target_Alg_tp3
+  DEP_FILE = CMakeFiles\Alg_tp3.dir\src\utils\GraphUtils.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Alg_tp3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir\src\utils
+
+build CMakeFiles/Alg_tp3.dir/src/utils/PermutationUtils.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug C$:/Users/casa-/OneDrive/Área$ de$ Trabalho/Faculdade/Algoritmos/Alg-tp3/src/utils/PermutationUtils.cpp || cmake_object_order_depends_target_Alg_tp3
+  DEP_FILE = CMakeFiles\Alg_tp3.dir\src\utils\PermutationUtils.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Alg_tp3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir\src\utils
+
+build CMakeFiles/Alg_tp3.dir/src/algorithms/DynamicProgramming.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug C$:/Users/casa-/OneDrive/Área$ de$ Trabalho/Faculdade/Algoritmos/Alg-tp3/src/algorithms/DynamicProgramming.cpp || cmake_object_order_depends_target_Alg_tp3
+  DEP_FILE = CMakeFiles\Alg_tp3.dir\src\algorithms\DynamicProgramming.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Alg_tp3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir\src\algorithms
+
+build CMakeFiles/Alg_tp3.dir/src/algorithms/BruteForce.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug C$:/Users/casa-/OneDrive/Área$ de$ Trabalho/Faculdade/Algoritmos/Alg-tp3/src/algorithms/BruteForce.cpp || cmake_object_order_depends_target_Alg_tp3
+  DEP_FILE = CMakeFiles\Alg_tp3.dir\src\algorithms\BruteForce.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Alg_tp3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir\src\algorithms
+
+build CMakeFiles/Alg_tp3.dir/src/algorithms/Greedy.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug C$:/Users/casa-/OneDrive/Área$ de$ Trabalho/Faculdade/Algoritmos/Alg-tp3/src/algorithms/Greedy.cpp || cmake_object_order_depends_target_Alg_tp3
+  DEP_FILE = CMakeFiles\Alg_tp3.dir\src\algorithms\Greedy.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Alg_tp3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Alg_tp3.dir\src\algorithms
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Alg_tp3
@@ -63,7 +93,7 @@ build CMakeFiles/Alg_tp3.dir/main.cpp.obj: CXX_COMPILER__Alg_tp3_unscanned_Debug
 #############################################
 # Link the executable Alg_tp3.exe
 
-build Alg_tp3.exe: CXX_EXECUTABLE_LINKER__Alg_tp3_Debug CMakeFiles/Alg_tp3.dir/main.cpp.obj
+build Alg_tp3.exe: CXX_EXECUTABLE_LINKER__Alg_tp3_Debug CMakeFiles/Alg_tp3.dir/main.cpp.obj CMakeFiles/Alg_tp3.dir/src/utils/GraphUtils.cpp.obj CMakeFiles/Alg_tp3.dir/src/utils/PermutationUtils.cpp.obj CMakeFiles/Alg_tp3.dir/src/algorithms/DynamicProgramming.cpp.obj CMakeFiles/Alg_tp3.dir/src/algorithms/BruteForce.cpp.obj CMakeFiles/Alg_tp3.dir/src/algorithms/Greedy.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Alg_tp3.dir

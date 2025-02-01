@@ -30,7 +30,6 @@ std::pair<int, std::vector<std::string>> greedy(const std::vector<std::string>& 
 
     if (graph.at(current).count(route[0])) {
         cost += graph.at(current).at(route[0]);
-        route.push_back(route[0]);
     } else {
         return {std::numeric_limits<int>::max(), {}};
     }

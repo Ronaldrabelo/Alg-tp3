@@ -16,9 +16,9 @@ int tspDP(int currentCity, int visitedMask, const std::vector<std::vector<int>>&
 
     int minCost = std::numeric_limits<int>::max();
 
-    for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+    for (size_t nextCity = 0; nextCity < dist.size(); ++nextCity) {
         if (!(visitedMask & (1 << nextCity))) {
-            int cost = dist[currentCity][nextCity] + tspDP(nextCity, visitedMask | (1 << nextCity), dist, memo);
+            int cost = dist[currentCity][nextCity] + tspDP(static_cast<int>(nextCity), visitedMask | (1 << nextCity), dist, memo);
             minCost = std::min(minCost, cost);
         }
     }
@@ -38,13 +38,13 @@ void reconstructRoute(int currentCity, int visitedMask, const std::vector<std::v
 
     bool nextCityFound = false;
 
-    for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+    for (size_t nextCity = 0; nextCity < dist.size(); ++nextCity) {
         if (!(visitedMask & (1 << nextCity))) {
             int expectedCost = dist[currentCity][nextCity] + memo[nextCity][visitedMask | (1 << nextCity)];
 
             if (expectedCost == memo[currentCity][visitedMask]) {
-                route.push_back(nextCity);
-                reconstructRoute(nextCity, visitedMask | (1 << nextCity), dist, memo, route);
+                route.push_back(static_cast<int>(nextCity));
+                reconstructRoute(static_cast<int>(nextCity), visitedMask | (1 << nextCity), dist, memo, route);
                 nextCityFound = true;
                 break;
             }
@@ -52,10 +52,10 @@ void reconstructRoute(int currentCity, int visitedMask, const std::vector<std::v
     }
 
     if (!nextCityFound) {
-        for (int nextCity = 0; nextCity < dist.size(); ++nextCity) {
+        for (size_t nextCity = 0; nextCity < dist.size(); ++nextCity) {
             if (!(visitedMask & (1 << nextCity))) {
-                route.push_back(nextCity);
-                reconstructRoute(nextCity, visitedMask | (1 << nextCity), dist, memo, route);
+                route.push_back(static_cast<int>(nextCity));
+                reconstructRoute(static_cast<int>(nextCity), visitedMask | (1 << nextCity), dist, memo, route);
                 break;
             }
         }
@@ -64,7 +64,7 @@ void reconstructRoute(int currentCity, int visitedMask, const std::vector<std::v
 
 std::pair<int, std::vector<std::string>> dynamicProgramming(const std::vector<std::string>& cities, const std::map<std::string, std::map<std::string, int>>& graph) {
     for (size_t i = 0; i < cities.size(); ++i) {
-        cityToIndex[cities[i]] = i;
+        cityToIndex[cities[i]] = static_cast<int>(i);
         indexToCity.push_back(cities[i]);
     }
 

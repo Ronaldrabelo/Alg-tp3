@@ -13,7 +13,7 @@ SRC = main.cpp \
 	  src/utils/PermutationUtils.cpp \
 
 # Arquivos-objeto correspondentes
-OBJ = main.cpp \
+OBJ = main.o \
 	  src/algorithms/BruteForce.o \
 	  src/algorithms/DynamicProgramming.o \
 	  src/algorithms/Greedy.o \
@@ -34,19 +34,19 @@ $(EXEC): $(OBJ)
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/algorithms/BruteForce.cpp: src/algorithms/BruteForce.cpp
+src/algorithms/BruteForce.o: src/algorithms/BruteForce.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/algorithms/DynamicProgramming.cpp: src/algorithms/DynamicProgramming.cpp
+src/algorithms/DynamicProgramming.o: src/algorithms/DynamicProgramming.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/algorithms/Greedy.cpp: src/algorithms/Greedy.cpp
+src/algorithms/Greedy.o: src/algorithms/Greedy.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/utils/GraphUtils.cpp: src/utils/GraphUtils.cpp
+src/utils/GraphUtils.o: src/utils/GraphUtils.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/utils/PermutationUtils.cpp: src/utils/PermutationUtils.cpp
+src/utils/PermutationUtils.o: src/utils/PermutationUtils.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Limpar arquivos gerados

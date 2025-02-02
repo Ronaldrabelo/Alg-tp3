@@ -58,13 +58,12 @@ int main() {
         }
         cout << endl;
     } else if (strategy == 'g') {
-        pair<int, vector<string>> result = greedy(cities, graph);
+        pair<int, vector<string>> result = nearestInsertion(cities, graph);
         cout << result.first << endl;
         for (const auto& city : result.second) {
             cout << city << " ";
         }
         cout << endl;
     }
-
     return 0;
 }

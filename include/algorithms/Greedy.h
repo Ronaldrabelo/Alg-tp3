@@ -8,6 +8,6 @@
 
 using Graph = std::map<std::string, std::map<std::string, int>>;
 
-std::pair<int, std::vector<std::string>> greedy(const std::vector<std::string>& cities, const Graph& graph);
+std::pair<int, std::vector<std::string>> nearestInsertion(const std::vector<std::string>& cities, const Graph& graph);
 
 #endif // GREEDY_H

@@ -1,11 +1,9 @@
 #include "../../include/algorithms/DynamicProgramming.h"
 #include <limits>
-#include <algorithm>
-
 std::map<std::string, int> cityToIndex;
 std::vector<std::string> indexToCity;
 
-int tspDP(int currentCity, int visitedMask, const std::vector<std::vector<int>>& dist, std::vector<std::vector<int>>& memo) {
+int findShortestTour(int currentCity, int visitedMask, const std::vector<std::vector<int>>& dist, std::vector<std::vector<int>>& memo) {
     if (visitedMask == (1 << dist.size()) - 1) {
         return dist[currentCity][0];
     }
@@ -18,7 +16,7 @@ int tspDP(int currentCity, int visitedMask, const std::vector<std::vector<int>>&
 
     for (size_t nextCity = 0; nextCity < dist.size(); ++nextCity) {
         if (!(visitedMask & (1 << nextCity))) {
-            int cost = dist[currentCity][nextCity] + tspDP(static_cast<int>(nextCity), visitedMask | (1 << nextCity), dist, memo);
+            int cost = dist[currentCity][nextCity] + findShortestTour(static_cast<int>(nextCity), visitedMask | (1 << nextCity), dist, memo);
             minCost = std::min(minCost, cost);
         }
     }
@@ -83,7 +81,7 @@ std::pair<int, std::vector<std::string>> dynamicProgramming(const std::vector<st
 
     std::vector<std::vector<int>> memo(cities.size(), std::vector<int>(1 << cities.size(), -1));
 
-    int minCost = tspDP(0, 1, dist, memo);
+    int minCost = findShortestTour(0, 1, dist, memo);
 
     std::vector<int> route;
     reconstructRoute(0, 1, dist, memo, route);

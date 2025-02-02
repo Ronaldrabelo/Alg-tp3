@@ -5,6 +5,6 @@
 #include <string>
 
 void reverseVector(std::vector<std::string>& vec, int start, int end);
-bool next_permutation(std::vector<std::string>& route);
+bool nextPermutation(std::vector<std::string>& route);
 
 #endif

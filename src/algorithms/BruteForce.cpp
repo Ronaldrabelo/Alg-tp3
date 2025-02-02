@@ -13,7 +13,7 @@ std::pair<int, std::vector<std::string>> bruteForce(std::vector<std::string> cit
             minCost = currentCost;
             bestRoute = cities;
         }
-    } while (next_permutation(cities));
+    } while (nextPermutation(cities));
 
     return {minCost, bestRoute};
 }

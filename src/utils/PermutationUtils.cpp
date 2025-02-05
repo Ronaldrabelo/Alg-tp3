@@ -1,5 +1,6 @@
 #include "../../include/utils/PermutationUtils.h"
 
+// Inverte a ordem dos elementos em um vetor dentro do intervalo [start, end].
 void reverseVector(std::vector<std::string>& vec, int start, int end) {
     while (start < end) {
         std::swap(vec[start], vec[end]);
@@ -8,6 +9,8 @@ void reverseVector(std::vector<std::string>& vec, int start, int end) {
     }
 }
 
+//Gera a próxima permutação lexicográfica do vetor dado, se existir.
+//Se já estiver na última permutação, retorna falso.
 bool nextPermutation(std::vector<std::string>& route) {
     int i = static_cast<int>(route.size()) - 2;
     while (i >= 0 && route[i] >= route[i + 1]) i--;

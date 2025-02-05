@@ -3,6 +3,9 @@
 #include "../../include/utils/GraphUtils.h"
 #include <limits>
 
+//O algoritmo testa todas as permutações possíveis das cidades e calcula o custo de cada rota.
+//Retorna a rota de menor custo encontrada.
+
 std::pair<int, std::vector<std::string>> bruteForce(std::vector<std::string> cities, const Graph& graph) {
     std::vector<std::string> bestRoute;
     int minCost = std::numeric_limits<int>::max();

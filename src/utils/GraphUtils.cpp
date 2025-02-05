@@ -1,6 +1,8 @@
 #include "../../include/utils/GraphUtils.h"
 #include <limits>
 
+// Calcula o custo total de uma rota percorrendo todas as cidades na ordem especificada.
+// Se houver uma cidade sem conexão válida, retorna um valor infinito.
 int calculateRouteCost(const std::vector<std::string>& route, const Graph& graph) {
     int cost = 0;
     for (size_t i = 0; i < route.size() - 1; ++i) {

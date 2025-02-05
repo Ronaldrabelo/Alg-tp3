@@ -2,6 +2,9 @@
 #include <limits>
 #include <unordered_map>
 
+
+//Algoritmo guloso para resolver o problema usando a inserção mais próxima.
+//Encontra uma solução aproximada para a rota mínima.
 std::pair<int, std::vector<std::string>> nearestInsertion(const std::vector<std::string>& cities, const Graph& graph) {
     if (cities.size() < 2) return {0, cities};
 

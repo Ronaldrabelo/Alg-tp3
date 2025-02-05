@@ -3,6 +3,8 @@
 std::map<std::string, int> cityToIndex;
 std::vector<std::string> indexToCity;
 
+// Função recursiva que encontra o menor custo para visitar todas as cidades e retornar à inicial.
+// Utiliza programação dinâmica com memoização para evitar recomputações.
 int findShortestTour(int currentCity, int visitedMask, const std::vector<std::vector<int>>& dist, std::vector<std::vector<int>>& memo) {
     if (visitedMask == (1 << dist.size()) - 1) {
         return dist[currentCity][0];
@@ -25,6 +27,7 @@ int findShortestTour(int currentCity, int visitedMask, const std::vector<std::ve
     return minCost;
 }
 
+// Função que reconstrói a rota ótima baseada na tabela de memoização.
 void reconstructRoute(int currentCity, int visitedMask, const std::vector<std::vector<int>>& dist, std::vector<std::vector<int>>& memo, std::vector<int>& route) {
     if (route.empty()) {
         route.push_back(currentCity);
@@ -60,6 +63,7 @@ void reconstructRoute(int currentCity, int visitedMask, const std::vector<std::v
     }
 }
 
+// Função principal que resolve o roblema usando Programação Dinâmica.
 std::pair<int, std::vector<std::string>> dynamicProgramming(const std::vector<std::string>& cities, const std::map<std::string, std::map<std::string, int>>& graph) {
     for (size_t i = 0; i < cities.size(); ++i) {
         cityToIndex[cities[i]] = static_cast<int>(i);
